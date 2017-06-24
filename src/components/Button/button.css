@@ -1,0 +1,23 @@
+button {
+  border: none;
+  border-radius: 3px;
+  color: rgba(0,0,0,.87);
+  background: transparent;
+  padding: 5px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.218s ease-in-out;
+  font-family: 'Roboto';
+}
+
+button:hover, button:focus {
+  color: #000;
+  background-color: rgba(0,0,0,0.08);
+}
+
+button:hover:active {
+  background-color: rgba(0,0,0,0.16);
+}
