@@ -1,0 +1,9 @@
+textarea {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+  resize: none;
+  padding: 0;
+}
