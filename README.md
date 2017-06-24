@@ -20,4 +20,4 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ### Screenshot
 
-![Empty application](https://github.com/vunguyentuan/google-keep-like/raw/master/screenshots/1.emoty-app.jpeg)
+![Empty application](./screenshots/1.empty-app.jpeg)
