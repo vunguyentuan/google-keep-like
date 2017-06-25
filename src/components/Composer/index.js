@@ -37,7 +37,9 @@ class Composer extends Component {
     // TODO: validate
 
     const title = this.state.title.value;
-    const content = this.state.content.value;
+    
+    // convert line break to </br> tag
+    const content = this.state.content.value.replace('\n', '</br>');
 
     onSubmit({
       title,
