@@ -6,7 +6,8 @@ body {
 }
 
 .App {
-
+  max-width: 1024px;
+  margin: 30px auto 0;
 }
 
 /* shared css */
