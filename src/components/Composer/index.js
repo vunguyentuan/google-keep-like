@@ -4,18 +4,20 @@ import Input from '../Input';
 import Button from '../Button';
 import Textarea from '../Textarea';
 
+const initialState = {
+  title: {
+    value: ''
+  },
+  content: {
+    value: ''
+  }
+};
+
 class Composer extends Component {
   constructor() {
     super();
 
-    this.state = {
-      title: {
-        value: ''
-      },
-      content: {
-        value: ''
-      }
-    };
+    this.state = initialState;
   }
 
   handleChange = event => {
@@ -29,11 +31,21 @@ class Composer extends Component {
   };
 
   handleSubmit = e => {
+    e.preventDefault();
     const { onSubmit } = this.props;
 
-    e.preventDefault();
+    // TODO: validate
 
-    onSubmit(this.state);
+    const title = this.state.title.value;
+    const content = this.state.content.value;
+
+    onSubmit({
+      title,
+      content
+    });
+
+    // reset
+    this.setState(initialState);
   };
 
   getValue = fieldName => {
@@ -42,7 +54,7 @@ class Composer extends Component {
 
   render() {
     return (
-      <div className="card">
+      <div className="card composer-container">
         <form onSubmit={this.handleSubmit} className="input-form">
           <Input
             type="text"
