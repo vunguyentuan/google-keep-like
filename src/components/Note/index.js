@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import './note.css';
 
-const Note = ({ title, content, style }) => {
-  return (
-    <div className="card note" style={style}>
-      <div className="note-title">{title}</div>
-      <div className="note-content" dangerouslySetInnerHTML={{__html: content}}/>
-    </div>
-  );
-};
+class Note extends PureComponent {
+  render() {
+    const { title, content, style } = this.props;
+    return (
+      <div>
+        <div className="card note" style={style}>
+          {title && <div className="note-title">{title}</div>}
+          <div className="note-content" dangerouslySetInnerHTML={{__html: content}}/>
+        </div>
+      </div>
+    );
+  }
+}
 
 export default Note;
