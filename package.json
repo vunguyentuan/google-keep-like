@@ -6,7 +6,10 @@
     "normalize.css": "^7.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-masonry-component": "^5.0.7"
+    "react-masonry-component": "^5.0.7",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "react-transition-group": "^1.2.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"

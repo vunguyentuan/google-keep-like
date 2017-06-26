@@ -39,7 +39,7 @@ class Composer extends Component {
     const title = this.state.title.value;
     
     // convert line break to </br> tag
-    const content = this.state.content.value.replace('\n', '</br>');
+    const content = this.state.content.value.replace(/\n/g, '</br>');
 
     onSubmit({
       title,

@@ -18,3 +18,10 @@ body {
   padding: 20px;
   background: white;
 }
+
+.box-fill {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

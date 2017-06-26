@@ -1,0 +1,29 @@
+.modal {
+  position: fixed;
+}
+
+.modal.active .modal-backdrop {
+  opacity: 0.75;
+}
+
+.modal.active .modal-content {
+  opacity: 1;
+}
+
+.modal-backdrop {
+  position: absolute;
+  background: #e5e5e5;
+  opacity: 0;
+}
+
+.modal-content {
+  box-sizing: border-box;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.30);
+  padding: 15px;
+  width: 600px;
+  min-height: 250px;
+  background: white;
+  position: absolute;
+  transform-origin: top left;
+  opacity: 0;
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import NoteList from './components/NoteList';
 import Composer from './components/Composer';
+import NoteDetail from './components/NodeDetail'
 
 class App extends Component {
   constructor() {
@@ -19,10 +20,12 @@ class App extends Component {
 
   render() {
     const { notes } = this.state;
+    console.log('re-render');
     return (
       <div className="App">
         <Composer onSubmit={this.handleAddNote} />
         <NoteList notes={notes} />
+        <NoteDetail notes={notes} location={this.props.location}/>
       </div>
     );
   }
