@@ -2,6 +2,10 @@
   position: fixed;
 }
 
+.modal .modal-backdrop {
+  opacity: 0;
+}
+
 .modal.active .modal-backdrop {
   opacity: 0.75;
 }

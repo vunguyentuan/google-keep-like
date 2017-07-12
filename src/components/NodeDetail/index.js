@@ -12,6 +12,15 @@ const fadeIn = [
   }
 ];
 
+const fadeInBackdrop = [
+  {
+    opacity: 0
+  },
+  {
+    opacity: 0.75
+  }
+];
+
 const defaultAnimationTiming = {
   duration: 500,
   easing: 'cubic-bezier(0.25, 0.8, 0.25, 1)'
@@ -51,7 +60,7 @@ class NoteDetail extends Component {
   }
 
   componentWillEnter(callback) {
-    this._modalBackdrop.animate(fadeIn, defaultAnimationTiming);
+    this._modalBackdrop.animate(fadeInBackdrop, defaultAnimationTiming);
     
     const modalLayout = this._modalContent.getBoundingClientRect()
     const tranformation = getTranformation(modalLayout);
@@ -67,6 +76,10 @@ class NoteDetail extends Component {
     fadeInAnimation.play();
   }
 
+  startAnimation() {
+
+  }
+
   componentDidEnter() {
     this._modal.classList.add('active')
   }
@@ -76,7 +89,7 @@ class NoteDetail extends Component {
   }
 
   componentWillLeave(callback) {
-    this._modalBackdrop.animate(fadeOut, defaultAnimationTiming);
+    this._modalBackdrop.animate([...fadeInBackdrop].reverse(), defaultAnimationTiming);
     const modalLayout = this._modalContent.getBoundingClientRect()
     const tranformation = getTranformation(modalLayout);
     const fadeOutAnimation = this._modalContent.animate([...tranformation].reverse(), defaultAnimationTiming);
@@ -90,7 +103,7 @@ class NoteDetail extends Component {
     const { note } = this.props
     return (
       <div className={`box-fill modal ${modalClass}`} ref={node => (this._modal = node)}>
-        <div className="box-fill modal-backdrop" ref={node => (this._modalBackdrop = node)}/>
+        <div className="box-fill modal-backdrop" ref={node => (this._modalBackdrop = node)} onClick={this.startAnimation}/>
         <div
           className="modal-content"
           ref={node => (this._modalContent = node)}>
