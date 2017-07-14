@@ -9,7 +9,8 @@
     "react-masonry-component": "^5.0.7",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "react-transition-group": "^1.2.0"
+    "react-transition-group": "^1.2.0",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
