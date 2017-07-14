@@ -13,11 +13,27 @@ const initialState = {
   }
 };
 
-class Composer extends Component {
-  constructor() {
-    super();
+const noteToState = note => {
+  return {
+    title: {
+      value: note.title,
+    },
+    content: {
+      value: note.content,
+    }
+  };
+}
 
-    this.state = initialState;
+class Composer extends Component {
+  constructor(props) {
+    super(props);
+
+    let state = initialState;
+    if (props.note) {
+      state = noteToState(props.note);
+    }
+
+    this.state = state;
   }
 
   handleChange = event => {
@@ -32,7 +48,7 @@ class Composer extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { onSubmit } = this.props;
+    const { onSubmit, note } = this.props;
 
     // TODO: validate
 
@@ -41,10 +57,17 @@ class Composer extends Component {
     // convert line break to </br> tag
     const content = this.state.content.value.replace(/\n/g, '</br>');
 
-    onSubmit({
+    const newNote = {
       title,
       content
-    });
+    }
+
+    // update case
+    if (note) {
+      newNote.id = note.id;
+    }
+
+    onSubmit(newNote);
 
     // reset
     this.setState(initialState);
@@ -54,9 +77,16 @@ class Composer extends Component {
     return this.state[fieldName].value;
   };
 
+  handleDelete = event => {
+    event.preventDefault();
+    this.props.onDelete && this.props.onDelete(this.props.note);
+  }
+
   render() {
+    const { isEdit } = this.props;
+
     return (
-      <div className="card composer-container">
+      <div className={`card composer-container ${isEdit ? 'edit' : ''}`}>
         <form onSubmit={this.handleSubmit} className="input-form">
           <Input
             type="text"
@@ -68,6 +98,7 @@ class Composer extends Component {
             onChange={this.handleChange}
           />
           <Textarea
+            className="note-content"
             name="content"
             placeholder="Take a note..."
             value={this.getValue('content')}
@@ -75,6 +106,7 @@ class Composer extends Component {
           />
 
           <div className="actions">
+            {isEdit && <Button onClick={this.handleDelete}>Delete</Button>}
             <Button>Done</Button>
           </div>
         </form>

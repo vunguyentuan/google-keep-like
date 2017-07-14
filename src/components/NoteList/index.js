@@ -25,7 +25,7 @@ const NodeList = ({ notes }) => {
   return (
     <Mansory className="note-list-container" options={options}>
       {notes.map((note, index) =>
-        <Link key={index} to={`/${note.title}`} onClick={event => handleClick(note, event)} style={noteStyle}>
+        <Link key={index} to={`/notes/${note.id}`} onClick={event => handleClick(note, event)} style={noteStyle}>
           <Note title={note.title} content={note.content} />
         </Link>
       )}

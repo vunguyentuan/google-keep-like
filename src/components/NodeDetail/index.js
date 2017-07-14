@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import { Link, Route } from 'react-router-dom';
 import './node-detail.css';
+import Composer from '../Composer';
 
 const fadeIn = [
   {
@@ -100,15 +101,14 @@ class NoteDetail extends Component {
 
   render() {
     const modalClass = this.state.active ? 'active' : ''
-    const { note } = this.props
+    const { note, onUpdate, onDelete } = this.props
     return (
       <div className={`box-fill modal ${modalClass}`} ref={node => (this._modal = node)}>
         <div className="box-fill modal-backdrop" ref={node => (this._modalBackdrop = node)} onClick={this.startAnimation}/>
         <div
           className="modal-content"
           ref={node => (this._modalContent = node)}>
-          <div className="note-title">{note.title}</div>
-          <div className="note-content" dangerouslySetInnerHTML={{__html: note.content}}/>
+          <Composer note={note} isEdit onSubmit={onUpdate} onDelete={onDelete}/>
         </div>
       </div>
     );
@@ -117,18 +117,18 @@ class NoteDetail extends Component {
 
 class NodeDetailTransition extends Component {
   render() {
-    const { notes } = this.props
+    const { notes, onUpdate, onDelete } = this.props
     return (
       <Route
-        path="/:noteId"
+        path="/notes/:noteId"
         children={({ match, ...rest }) => {
           let foundNote
           if (match) {
-            foundNote = notes.find(note => note.title === match.params.noteId)
+            foundNote = notes.find(note => note.id === match.params.noteId)
           }
           return (
             <TransitionGroup component="div" className="animated-list">
-              {match && foundNote && <NoteDetail note={foundNote}/>}
+              {match && foundNote && <NoteDetail onUpdate={onUpdate} onDelete={onDelete} note={foundNote}/>}
             </TransitionGroup>
           );
         }}

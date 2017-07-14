@@ -3,6 +3,15 @@
   margin: 0 auto 32px;
 }
 
+.composer-container.edit {
+  margin: 0;
+  width: 700px;
+}
+
+.composer-container.edit .note-content {
+  min-height: 150px;
+}
+
 .input-form {
   font-family: 'Roboto Slab', serif;
 }
