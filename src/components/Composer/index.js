@@ -8,7 +8,7 @@ const initialState = {
   title: {
     value: ''
   },
-  content: {
+  description: {
     value: ''
   }
 };
@@ -18,8 +18,8 @@ const noteToState = note => {
     title: {
       value: note.title,
     },
-    content: {
-      value: note.content,
+    description: {
+      value: note.description,
     }
   };
 }
@@ -55,11 +55,11 @@ class Composer extends Component {
     const title = this.state.title.value;
     
     // convert line break to </br> tag
-    const content = this.state.content.value.replace(/\n/g, '</br>');
+    const description = this.state.description.value.replace(/\n/g, '</br>');
 
     const newNote = {
       title,
-      content
+      description
     }
 
     // update case
@@ -98,10 +98,10 @@ class Composer extends Component {
             onChange={this.handleChange}
           />
           <Textarea
-            className="note-content"
-            name="content"
+            className="note-description"
+            name="description"
             placeholder="Take a note..."
-            value={this.getValue('content')}
+            value={this.getValue('description')}
             onChange={this.handleChange}
           />
 

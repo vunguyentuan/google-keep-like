@@ -1,6 +1,6 @@
 import uuidv4 from 'uuid/v4';
-const BASE_URL = 'https://googlekeep.herokuapp.com/api';
-
+const BASE_URL = 'https://google-keep.herokuapp.com/api';
+const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDIsImlhdCI6MTUwMDEwNTQ1NCwiZXhwIjoxNTAwMTA5MDU0fQ.uXs_vgSMaLwlpeKh1jB7lnYJ2Gkw8draoMM_F6ik1ZY'
 
 const mockDatabase = {
   notes: {
@@ -8,21 +8,22 @@ const mockDatabase = {
   }
 };
 
-// const fetchJSON = (url, option) => {
-//   return fetch(`${BASE_URL}${url}`, {
-//     ...option,
-//     headers: {
-//       'content-type': 'application/json',
-//     } 
-//   })
-//   .then(response => {
-//     if(!response.ok) {
-//       throw new Error('error');
-//     }
+const fetchJSON = (url, option) => {
+  return fetch(`${BASE_URL}${url}`, {
+    ...option,
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${TOKEN}`,
+    } 
+  })
+  .then(response => {
+    if(!response.ok) {
+      throw new Error('error');
+    }
 
-//     return response.json();
-//   });
-// }
+    return response.json();
+  });
+}
 
 const successHandler = (data) => {
   return Promise.resolve(data)
@@ -35,50 +36,50 @@ const mapToArray = data => {
   })
 }
 
-const fetchJSON = (url, option) => {
-  // add default method GET
-  option = {
-    method: 'GET',
-    ...option
-  }
+// const fetchJSON = (url, option) => {
+//   // add default method GET
+//   option = {
+//     method: 'GET',
+//     ...option
+//   }
 
-  // MOCK SERVER HANDLER
-  // get notes
-  if (url === '/notes' && option.method === 'GET') {
-    const notes = mapToArray(mockDatabase.notes);
-    return successHandler(notes);
-  }
+//   // MOCK SERVER HANDLER
+//   // get notes
+//   if (url === '/notes' && option.method === 'GET') {
+//     const notes = mapToArray(mockDatabase.notes);
+//     return successHandler(notes);
+//   }
 
-  // add note
-  if (url === '/notes' && option.method === 'POST') {
-    const note = JSON.parse(option.body);
-    const randomId = uuidv4();
-    mockDatabase.notes[randomId] = {
-      ...note,
-      id: randomId
-    };
+//   // add note
+//   if (url === '/notes' && option.method === 'POST') {
+//     const note = JSON.parse(option.body);
+//     const randomId = uuidv4();
+//     mockDatabase.notes[randomId] = {
+//       ...note,
+//       id: randomId
+//     };
 
-    return successHandler(note);
-  }
+//     return successHandler(note);
+//   }
 
-  // update note
-  if (url.indexOf('/notes') > -1 && option.method === 'PUT') {
-    const note = JSON.parse(option.body);
-    mockDatabase.notes[note.id] = {
-      ...note,
-    };
+//   // update note
+//   if (url.indexOf('/notes') > -1 && option.method === 'PUT') {
+//     const note = JSON.parse(option.body);
+//     mockDatabase.notes[note.id] = {
+//       ...note,
+//     };
 
-    return successHandler(note);
-  }
+//     return successHandler(note);
+//   }
 
-  // delete note
-  if (url.indexOf('/notes') > -1 && option.method === 'DELETE') {
-    const noteId = url.split('/notes/')[1];
-    delete mockDatabase.notes[noteId];
+//   // delete note
+//   if (url.indexOf('/notes') > -1 && option.method === 'DELETE') {
+//     const noteId = url.split('/notes/')[1];
+//     delete mockDatabase.notes[noteId];
 
-    return successHandler({ status: 'OK' });
-  }
-}
+//     return successHandler({ status: 'OK' });
+//   }
+// }
 
 export const getNotes = () => {
   return fetchJSON('/notes');

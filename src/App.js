@@ -9,7 +9,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      notes: []
+      notes: [],
+      loading: true,
     };
   }
 
@@ -21,7 +22,8 @@ class App extends Component {
     api.getNotes().then(notes => {
       console.log(notes);
       this.setState({
-        notes: notes
+        notes: notes,
+        loading: false,
       });
     });
   };
@@ -46,8 +48,8 @@ class App extends Component {
   };
 
   render() {
-    const { notes } = this.state;
-
+    const { notes, loading } = this.state;
+    if (loading) return <div className="loading">loading</div>
     return (
       <div className="App">
         <Composer onSubmit={this.handleAddNote} />

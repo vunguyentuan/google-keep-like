@@ -124,7 +124,7 @@ class NodeDetailTransition extends Component {
         children={({ match, ...rest }) => {
           let foundNote
           if (match) {
-            foundNote = notes.find(note => note.id === match.params.noteId)
+            foundNote = notes.find(note => note.id == match.params.noteId)
           }
           return (
             <TransitionGroup component="div" className="animated-list">
