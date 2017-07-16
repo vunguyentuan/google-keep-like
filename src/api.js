@@ -1,12 +1,6 @@
 import uuidv4 from 'uuid/v4';
 const BASE_URL = 'https://google-keep.herokuapp.com/api';
-const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDIsImlhdCI6MTUwMDEwNTQ1NCwiZXhwIjoxNTAwMTA5MDU0fQ.uXs_vgSMaLwlpeKh1jB7lnYJ2Gkw8draoMM_F6ik1ZY'
-
-const mockDatabase = {
-  notes: {
-
-  }
-};
+const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDIsImlhdCI6MTUwMDEwOTIxNCwiZXhwIjoxNTAwMTEyODE0fQ.EkE7nqENZknZyk1V2YkYMqUTkUNycEE5qJCKdpP97p8'
 
 const fetchJSON = (url, option) => {
   return fetch(`${BASE_URL}${url}`, {
@@ -24,62 +18,6 @@ const fetchJSON = (url, option) => {
     return response.json();
   });
 }
-
-const successHandler = (data) => {
-  return Promise.resolve(data)
-}
-
-const mapToArray = data => {
-  const keys = Object.keys(data);
-  return keys.map(key => {
-    return data[key];
-  })
-}
-
-// const fetchJSON = (url, option) => {
-//   // add default method GET
-//   option = {
-//     method: 'GET',
-//     ...option
-//   }
-
-//   // MOCK SERVER HANDLER
-//   // get notes
-//   if (url === '/notes' && option.method === 'GET') {
-//     const notes = mapToArray(mockDatabase.notes);
-//     return successHandler(notes);
-//   }
-
-//   // add note
-//   if (url === '/notes' && option.method === 'POST') {
-//     const note = JSON.parse(option.body);
-//     const randomId = uuidv4();
-//     mockDatabase.notes[randomId] = {
-//       ...note,
-//       id: randomId
-//     };
-
-//     return successHandler(note);
-//   }
-
-//   // update note
-//   if (url.indexOf('/notes') > -1 && option.method === 'PUT') {
-//     const note = JSON.parse(option.body);
-//     mockDatabase.notes[note.id] = {
-//       ...note,
-//     };
-
-//     return successHandler(note);
-//   }
-
-//   // delete note
-//   if (url.indexOf('/notes') > -1 && option.method === 'DELETE') {
-//     const noteId = url.split('/notes/')[1];
-//     delete mockDatabase.notes[noteId];
-
-//     return successHandler({ status: 'OK' });
-//   }
-// }
 
 export const getNotes = () => {
   return fetchJSON('/notes');
@@ -109,22 +47,23 @@ export const deleteNote = note => {
   });
 }
 
-export const login = (username, password) => {
+export const login = (email, password) => {
   return fetchJSON('/auth', {
     method: 'POST',
     body: JSON.stringify({
-      username,
+      email,
       password,
     })
   });
 }
 
-export const register = (username, password) => {
+export const register = (username, password, email) => {
   return fetchJSON('/users', {
     method: 'POST',
     body: JSON.stringify({
       username,
       password,
+      email,
     })
   });
 }
