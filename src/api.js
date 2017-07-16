@@ -1,5 +1,7 @@
 import uuidv4 from 'uuid/v4';
 const BASE_URL = 'https://google-keep.herokuapp.com/api';
+
+// Please use yours TOKEN HERE
 const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDIsImlhdCI6MTUwMDEwOTIxNCwiZXhwIjoxNTAwMTEyODE0fQ.EkE7nqENZknZyk1V2YkYMqUTkUNycEE5qJCKdpP97p8'
 
 const fetchJSON = (url, option) => {
